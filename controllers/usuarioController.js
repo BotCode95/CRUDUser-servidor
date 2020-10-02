@@ -52,7 +52,7 @@ exports.crearUsuario = async (req, res) => {
 }
 
 //obtiene todos los usuarios
-exports.mostrarUsuarios = async (req, res) => {
+exports.obtenerUsuarios = async (req, res) => {
     try{
         // console.log(req.usuario);
         // const {usuario} = req.query;
@@ -64,4 +64,69 @@ exports.mostrarUsuarios = async (req, res) => {
         res.status(500).send('Hubo un error')
     }
    
+}
+
+exports.actualizarUsuario  = async (req,res) => {
+    const errores = validationResult(req);
+    if(!errores.isEmpty()){
+        return res.status(400).json({errores: errores.array()})
+    }
+
+    const nuevoUsuario = {};
+
+    const {nombre, apellido, telefono, ciudad, email} = req.body;
+
+    
+    if(nombre) {
+        nuevoUsuario.nombre= nombre;
+    }
+    
+    if(apellido) {
+        nuevoUsuario.apellido= apellido;
+    }
+    
+    if(telefono) {
+        nuevoUsuario.telefono= telefono;
+    }
+    
+    if(ciudad) {
+        nuevoUsuario.ciudad= ciudad;
+    }
+    
+    if(email) {
+        nuevoUsuario.email= email;
+    }
+
+    try {
+        let usuario = await Usuario.findById(req.params.id);
+
+        if(!usuario){
+            return res.status(400).json({msg: 'Usuario no encontrado'})
+        }
+
+        usuario = await Usuario.findOneAndUpdate({_id : req.params.id}, nuevoUsuario, {new: true})
+        res.json({usuario})
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error en el servidor');
+    }
+}
+
+exports.eliminarUsuario = async (req,res) => {
+    try {
+        let usuario = await Usuario.findById(req.params.id);
+        if(!usuario){
+            return res.status(400).json({msg: 'Usuario no encontrado'})
+        }
+
+        // const existeUsuario = await Usuario.findById(usuario);
+
+        //eliminar 
+        await Usuario.findOneAndRemove({_id: req.params.id});
+        res.json({msg: 'Usuario Eliminado'})
+        
+    } catch (error) {
+        console.log(error);
+        res.status(500).send('Error en el servidor')
+    }
 }

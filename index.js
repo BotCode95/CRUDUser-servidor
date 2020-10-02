@@ -1,10 +1,10 @@
 const express = require('express');
 const conectarDB = require('./config/db');
 const cors = require('cors');
-//create a server
+
+
 const app = express();
 
-//connect db
 conectarDB();
 
 //habilitar cors
@@ -22,7 +22,6 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contactos', require('./routes/contactos'))
 // app.use('/api/usuarios/listado', require('./routes/usuarios'));
 
-// app.use('/api/listado', require('./routes/listado'));
 //init app
 app.listen(PORT, () => {
     console.log(`El servidor esta funcionando en el puerto ${PORT}`);

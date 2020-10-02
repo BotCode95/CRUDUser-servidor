@@ -18,20 +18,17 @@ router.post('/',
 
 router.get('/',
     auth,
-    usuarioController.mostrarUsuarios
+    usuarioController.obtenerUsuarios
 )
 
-// //update 
-// router.put('/:id',
-//     auth,
-//     usuarioController.actualizarTarea
-// )
+router.put('/:id',
+    auth,
+    usuarioController.actualizarUsuario
+)
 
-// //delete 
-// router.delete('/:id',
-//     auth,
-//     usuarioController.eliminarTarea
-// )
-
+router.delete('/:id',
+    auth,
+    usuarioController.eliminarUsuario
+)
 
 module.exports = router;
