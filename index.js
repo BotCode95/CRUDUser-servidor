@@ -22,6 +22,11 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/contactos', require('./routes/contactos'))
 // app.use('/api/usuarios/listado', require('./routes/usuarios'));
 
+// app.get('/', (req,res) => {
+//     res.send('Hola Mundo')
+// });
+
+
 //init app
 app.listen(PORT, () => {
     console.log(`El servidor esta funcionando en el puerto ${PORT}`);
