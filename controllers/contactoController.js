@@ -72,12 +72,6 @@ exports.actualizarContacto = async (req,res) => {
         if(!contacto){
             return res.status(400).json({msg: 'Contacto no encontrado'});
         }
-
-        // nuevoContacto.nombre = nombre;
-        // nuevoContacto.apellido = apellido;
-        // nuevoContacto.telefono = telefono;
-        // nuevoContacto.ciudad = ciudad;
-        // nuevoContacto.email = email;
         //verificar el creador del proyecto
         if(contacto.creador.toString() !== req.usuario.id){
             return res.status(400).json({msg: 'No autorizado'})
