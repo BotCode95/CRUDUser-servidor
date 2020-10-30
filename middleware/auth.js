@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken')
 
 module.exports = function(req,res,next){
     //leer el token del header -> with email and password post in api/listado 
-    //pass in header x-auth-token and token for genera the token in consola
+    //pass in header x-auth-token and token for generate the token in consola
     const token = req.header('x-auth-token')
 
     // console.log(token);
